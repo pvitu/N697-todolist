@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List - Unifor - N697</title>
+	<link rel="stylesheet" href="style.css">
+    <script>
+        // Tarefas de exemplo (simulação de dados para visualização)
+        
+		<!-- <const tasks = [
+            { title: 'Estudar para a prova de Java', status: 'Em andamento', dueDate: '2025-04-05' },
+            { title: 'Comprar presentes para aniversário', status: 'Pendente', dueDate: '2025-04-10' },
+            { title: 'Finalizar projeto de faculdade', status: 'Concluída', dueDate: '2025-03-30' }
+        ]; -->
+
+        // Função para exibir as tarefas na página
+        function fetchTasks() {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = ''; // Limpa a lista existente
+
+            // Para cada tarefa, cria um item de lista e exibe na página
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.textContent = `Título: ${task.title} | Status: ${task.status} | Data: ${new Date(task.dueDate).toLocaleDateString()}`;
+                taskList.appendChild(li);
+            });
+        }
+
+        // Função para criar uma nova tarefa (simulação)
+        function createTask() {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const status = document.getElementById('status').value;
+            const dueDate = document.getElementById('dueDate').value;
+
+            const newTask = {
+                title,
+                description,
+                status,
+                dueDate,
+            };
+
+            // Adiciona a nova tarefa ao array de tarefas (simulação)
+            tasks.push(newTask);
+
+            // Atualiza a lista de tarefas após criar a nova
+            fetchTasks();
+        }
+
+        // Ao carregar a página, exibe as tarefas
+        window.onload = fetchTasks;
+    </script>
+</head>
+<body>
+
+	<div class="container" style="min-height: 500px;">
+		<h1>To-Do List</h1>
+
+		<div>
+			<h3>Adicionar Tarefa</h3>
+			<input type="text" id="title" placeholder="Título">
+			<input type="text" id="description" placeholder="Descrição">
+			<input type="text" id="status" placeholder="Status">
+			<input type="date" id="dueDate">
+			<button onclick="createTask()">Adicionar</button>
+		</div>
+
+		<h3>Tarefas</h3>
+		<ul id="task-list"></ul>
+
+	</div>
+	
+	<footer><div class="container">Paulo Vitor Temoteo Araújo - 2326178, Antonia Taynara Maciel Paulo 2323818 e Francisca Josiana dos Santos Oliveira - 2323835</div></footer>
+	
+</body>
+</html>
