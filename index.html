@@ -5,44 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List - Unifor - N697</title>
 	<link rel="stylesheet" href="style.css">
-    <script>
-        // Tarefas de exemplo (simulação de dados para visualização)
-        
-		<!-- <const tasks = [
-            { title: 'Estudar para a prova de Java', status: 'Em andamento', dueDate: '2025-04-05' },
-            { title: 'Comprar presentes para aniversário', status: 'Pendente', dueDate: '2025-04-10' },
-            { title: 'Finalizar projeto de faculdade', status: 'Concluída', dueDate: '2025-03-30' }
-        ]; -->
+     <script>
+        const apiUrl = 'https://replit.com/@vitutemoteo/index#index.js'; // Substitua com a URL do seu backend no Replit
 
-        // Função para exibir as tarefas na página
-        function fetchTasks() {
+        // Função para obter todas as tarefas
+        async function fetchTasks() {
+            const response = await fetch(apiUrl);
+            const tasks = await response.json();
             const taskList = document.getElementById('task-list');
             taskList.innerHTML = ''; // Limpa a lista existente
 
             // Para cada tarefa, cria um item de lista e exibe na página
             tasks.forEach(task => {
                 const li = document.createElement('li');
-                li.textContent = `Título: ${task.title} | Status: ${task.status} | Data: ${new Date(task.dueDate).toLocaleDateString()}`;
+                li.textContent = `Título: ${task.get('title')} | Status: ${task.get('status')} | Data: ${new Date(task.get('dueDate')).toLocaleDateString()}`;
                 taskList.appendChild(li);
             });
         }
 
-        // Função para criar uma nova tarefa (simulação)
-        function createTask() {
+        // Função para criar uma nova tarefa
+        async function createTask() {
             const title = document.getElementById('title').value;
             const description = document.getElementById('description').value;
             const status = document.getElementById('status').value;
             const dueDate = document.getElementById('dueDate').value;
 
-            const newTask = {
+            const taskData = {
                 title,
                 description,
                 status,
                 dueDate,
             };
 
-            // Adiciona a nova tarefa ao array de tarefas (simulação)
-            tasks.push(newTask);
+            // Envia a requisição POST para criar a nova tarefa
+            await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(taskData),
+            });
 
             // Atualiza a lista de tarefas após criar a nova
             fetchTasks();
